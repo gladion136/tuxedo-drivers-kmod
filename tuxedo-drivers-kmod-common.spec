@@ -28,6 +28,13 @@ for module in %{module_names}; do
   install -D -m 0644 ${module}.conf %{buildroot}%{_modulesloaddir}/${module}.conf
 done
 
+%install
+mkdir -p %{buildroot}%{_modulesloaddir}
+for module in %{module_names}; do
+    echo "$module" > ${module}.conf
+    install -D -m 0644 ${module}.conf %{buildroot}%{_modulesloaddir}/${module}.conf
+done
+
 %files
 %{_modulesloaddir}/*.conf
 
