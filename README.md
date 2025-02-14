@@ -1,16 +1,23 @@
 # 🐧 tuxedo-drivers-kmod 
 
-> ⚠️ WARNING: WIP!! Some features are missing!
+> ⚠️ WARNING: WIP!! Some features are missing! For more details, check the [Roadmap](#roadmap).
 
 RPM spec files to build the [tuxedo-drivers](https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers) as kmod. 
 
 # 📚 Table of Contents 
 
+- [🚀 Quick start](#quick-start)
 - [🧩 Included modules](#included-modules)
 - [🛠️ Build](#build)
 - [📦 Install](#install)
 - [✅ Check if the modules are loaded](#check)
 - [🗺️ Roadmap](#roadmap)
+
+## 🚀 Quick start <a id="quick-start"></a>
+
+[Brickman240](https://github.com/BrickMan240) offers custom images (bluefin, aurora, bazzite) with these modules pre-installed. 
+These images provide an easy way to install and test the Tuxedo drivers on your system, including versions with Tuxedo-Control-Center and tuxedo-rs. 
+For more information and discussions, visit the relevant [issue thread on GitHub](https://github.com/ublue-os/akmods/issues/30#issuecomment-2650944807).
 
 ## 🧩 Included modules <a id="included-modules"></a>
 
@@ -77,10 +84,11 @@ Some modules could fail if they are not supported with your hardware.
 ## 🗺️ Roadmap <a id="roadmap"></a>
 
 - [x] Port tuxedo-drivers to akmod
-- [ ] Testing the modules
-- [ ] Test with [tuxedo-control-center](https://github.com/tuxedocomputers/tuxedo-control-center)
-- [ ] Test with [tuxedo-rs](https://github.com/AaronErhardt/tuxedo-rs)
-- [ ] Publish to copr
+- [x] Testing the modules
+- [x] Test with [tuxedo-control-center](https://github.com/tuxedocomputers/tuxedo-control-center)
+- [x] Test with [tuxedo-rs](https://github.com/AaronErhardt/tuxedo-rs)
+- [x] Publish to copr
+- [x] Test on different devices
 - [ ] Integrate into [akmods](https://github.com/ublue-os/akmods)
-- [ ] Test on different devices
+- [ ] Test on a wide variety of devices
 - [ ] Integrate into [bluefin](https://github.com/ublue-os/bluefin)
