@@ -3,6 +3,8 @@
 > ⚠️ WARNING: WIP!! Some features are missing! For more details, check the [Roadmap](#roadmap).
 
 RPM spec files to build the [tuxedo-drivers](https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers) as kmod. 
+The packages are published to copr [here](https://copr.fedorainfracloud.org/coprs/gladion136/tuxedo-drivers-kmod/).
+The changelog can be found [here](https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers/-/blob/main/debian/changelog?ref_type=heads).
 
 # 📚 Table of Contents 
 

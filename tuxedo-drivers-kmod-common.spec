@@ -39,5 +39,3 @@ done
 %{_modulesloaddir}/*.conf
 
 %changelog
-* Sat Nov 23 2024 Etienne Schmidt <gladion136@googlemail.com> - 4.11.2-1
-- Initial release of tuxedo-drivers-kmod-common

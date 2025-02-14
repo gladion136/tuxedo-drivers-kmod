@@ -74,5 +74,3 @@ cp 61-sensor-infinityflex.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 %config(noreplace) %{_sysconfdir}/modprobe.d/tuxedo_keyboard.conf
 
 %changelog
-* Sat Nov 23 2024 Etienne Schmidt <gladion136@googlemail.com> - 4.11.2-1
-- Initial release of tuxedo-drivers-kmod
