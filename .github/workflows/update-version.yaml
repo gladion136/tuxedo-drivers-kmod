@@ -2,6 +2,8 @@ on:
   schedule:
     - cron: "0 14 * * *"
   push:
+    branches:
+      - main
 
 jobs:
   update:
@@ -25,7 +27,7 @@ jobs:
         
         if [ "$latest_version" = "$current_version" ]; then
           echo "No new version available."
-          echo "::set-output name=new_version::false"
+          echo "new_version=false" >> $GITHUB_ENV
         else
           echo "New version available: $latest_version"
           echo "Updating spec files..."
