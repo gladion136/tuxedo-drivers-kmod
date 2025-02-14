@@ -4,7 +4,7 @@
 %endif
 
 Name:     tuxedo-drivers-kmod
-Version:  4.11.3
+Version:  4.12.1
 Release:  1%{?dist}
 Summary:  Tuxedo drivers as kmod
 License:  GPL-2.0-or-later
