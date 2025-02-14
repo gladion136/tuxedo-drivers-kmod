@@ -1,0 +1,55 @@
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  push:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Check for new version
+      id: check_version
+      run: |
+        # Get the latest tag from the tuxedo-drivers repository
+        response=$(curl -s https://gitlab.com/api/v4/projects/tuxedocomputers%2Fdevelopment%2Fpackages%2Ftuxedo-drivers/repository/tags?ref=main)
+        
+        latest_tag=$(echo "$response" | jq -r '.[0].name')
+        latest_version=${latest_tag#v}
+        current_version=$(grep -m1 '^Version:' tuxedo-drivers-kmod.spec | awk '{print $2}')
+        
+        echo "Latest version: $latest_version"
+        echo "Current version: $current_version"
+        
+        if [ "$latest_version" = "$current_version" ]; then
+          echo "No new version available."
+          echo "::set-output name=new_version::false"
+        else
+          echo "New version available: $latest_version"
+          echo "Updating spec files..."
+          sed -i "s/^Version:.*/Version:  $latest_version/" tuxedo-drivers-kmod.spec
+          sed -i "s/^Version:.*/Version:  $latest_version/" tuxedo-drivers-kmod-common.spec
+          echo "latest_version=$latest_version" >> $GITHUB_ENV
+          echo "new_version=true" >> $GITHUB_ENV
+        fi
+
+    - name: Create PR
+      if: env.new_version == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        branch_name="update-to-$latest_version"
+        if git ls-remote --exit-code --heads origin $branch_name; then
+          echo "Branch $branch_name already exists. Exiting."
+          exit 1
+        fi
+        latest_version=${{ env.latest_version }}
+        git config --global user.email "noreply@schmidt-ti.eu"
+        git config --global user.name "CI Bot"
+        git checkout -b $branch_name
+        git add tuxedo-drivers-kmod.spec tuxedo-drivers-kmod-common.spec
+        git commit -m "version: increase to '$latest_version'"
+        git push --set-upstream origin $branch_name
+        gh pr create --title "Update to version $latest_version" --body "CI: Update tuxedo-drivers-kmod to $latest_version"
