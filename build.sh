@@ -1,6 +1,7 @@
 #/bin/sh
 # Build script for Tuxedo drivers
 # Builts: tuxedo-drivers-kmod-common, kmod-tuxedo-drivers (for your kernel) and akmod-tuxedo-drivers
+set -e
 
 # Check if the kernels parameter is provided, if not, default to uname -r
 if [ -z "$1" ]; then
@@ -10,6 +11,7 @@ else
 fi
 
 echo "--> Copying spec files to ~/rpmbuild/SPECS/"
+mkdir -p ~/rpmbuild/SPECS/
 cp ./tuxedo-drivers-kmod.spec ~/rpmbuild/SPECS/
 cp ./tuxedo-drivers-kmod-common.spec ~/rpmbuild/SPECS/
 

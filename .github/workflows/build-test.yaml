@@ -1,0 +1,32 @@
+on:
+  push:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:41
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up build environment
+      run: |
+        sudo dnf install -y fedpkg fedora-packager rpmdevtools ncurses-devel pesign \
+          bpftool bc bison dwarves elfutils-devel flex gcc gcc-c++ gcc-plugin-devel \
+          glibc-static hostname m4 make net-tools openssl openssl-devel perl-devel \
+          perl-generators python3-devel which kernel-rpm-macros tree kernel-devel kmodtool \
+          && dnf clean all
+
+    - name: Set up RPM build directories
+      run: |
+        rm -rf ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS} || true
+        mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+
+    - name: Build modules
+      run: |
+        chmod +x build.sh
+        ./build.sh
+
+    - name: List built RPMs
+      run: |
+        tree ~/rpmbuild/RPMS/
